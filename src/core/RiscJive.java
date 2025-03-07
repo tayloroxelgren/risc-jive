@@ -14,34 +14,28 @@ public class RiscJive{
 
     private List<Integer> instructions;
     private final CpuCore cpu;
-    private final Map<Integer, InstructionCommand> commandRegistry;
-    private int programCounter;
+    private Map<Integer, InstructionCommand> commandRegistry;
+    private List<InstructionCommand> decodedInstructions;
 
     public RiscJive(){
         this.cpu=new CpuCore();
         this.instructions=new ArrayList<>();
-        this.programCounter=0;
         this.commandRegistry = new HashMap<>();
+        this.decodedInstructions=new ArrayList<>();
         registerCommands();
     }
 
     private void registerCommands() {
         // hashing using op, funct3,funct7
-        commandRegistry.put((0x13) | (0x0 << 7) | (0x00 << 10), new AddiCommand()); // ADDI
-        commandRegistry.put((0x33) | (0x1 << 7) | (0x00 << 10), new SllCommand());  // SLL
-        commandRegistry.put((0x33) | (0x0 << 7) | (0x20 << 10), new SubCommand()); // SUB
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x00500293), new AddiCommand()); // ADDI
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x006292b3), new SllCommand());  // SLL
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x406282b3), new SubCommand()); // SUB
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x00728163), new BranchEqualCommand()); // BEQ
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x00729163), new BranchNotEqualCommand()); // BNE
     }
 
     public void loadSampleProgram() {
         instructions.clear();
-        
-        // Psedu Assembly overview
-        // addi x5, x0, 5
-        // addi x6, x0, 1
-        // sll x5, x5, x6
-        // addi x5, x5, 1 X 10000
-        // sub x5, x5, x6 X 69
-
 
         // addi x5, x0, 5
         instructions.add(0x00500293); // 0x00500093: ADDI x1, x0, 5
@@ -58,9 +52,17 @@ public class RiscJive{
             instructions.add(0x00128293);
         }
 
-        for(int i=0;i<69;i++){
-            instructions.add(0x406282b3);
-        }
+        // addi x7, x0, 2000
+        instructions.add(0x7d000393); //
+
+        // sub x5, x5, x6
+        instructions.add(0x406282b3);
+
+        // bne x5, x7, -2
+        // due to offset 2 being in half-words, this jumps back by 1 instruction
+        // This should ensure that x5==2000
+        instructions.add(0xfe729fe3);
+
 
     }
 
@@ -81,9 +83,10 @@ public class RiscJive{
         System.out.printf("rs1: x%d\n", rs1);
         System.out.printf("rs2: x%d\n", rs2);
         System.out.printf("funct7: 0x%02X\n", funct7);
+
     }
 
-    private void executeInstruction(int instruction) {
+    private InstructionCommand decodeInstruction(int instruction) {
         int opcode = instruction & 0x7F; // bits 0–6
         int rd = (instruction >> 7) & 0x1F; // bits 7–11
         int funct3 = (instruction >> 12) & 0x7; // bits 12–14
@@ -93,33 +96,35 @@ public class RiscJive{
         int imm = instruction >> 20; // For I-type immediates
 
         // Generate the same hash key used in command registration
-        int hashKey = (opcode) | (funct3 << 7) | (funct7 << 10);
+        int hashKey = InstructionHasher.getHashForInstruction(instruction);
 
         InstructionCommand command = commandRegistry.get(hashKey);
         
-        if (command != null) {
-            command.execute(cpu, rd, rs1, rs2, imm);
-        } else {
-            System.out.printf("Unknown instruction: 0x%08X\n", instruction);
-        }
+        return command;
     }
 
 
-    public void executeProgram() {
-        while (programCounter < instructions.size()) {
-            int instruction = instructions.get((int) programCounter);
-            executeInstruction(instruction);
-            programCounter++;
+    public void decodeInstructions() {
+        for(Integer ins:this.instructions){
+            this.decodedInstructions.add(decodeInstruction(ins));
         }
+    }
 
-        System.out.println("Emulation complete.");
-        cpu.printRegisters();
+    // sends commands to receiver along with original hex value so that parameters can be received
+    public void sendCommands(List<InstructionCommand> cmds,List<Integer> instructions){
+        this.cpu.setProgram(cmds,instructions);
+    }
+
+    public void run(){
+        cpu.runEmulator();
     }
 
     public static void main(String[] args) {
         RiscJive emulator = new RiscJive();
         emulator.loadSampleProgram();
-        emulator.executeProgram();
+        emulator.decodeInstructions();
+        emulator.sendCommands(emulator.decodedInstructions,emulator.instructions);
+        emulator.run();
     }
 
 }
