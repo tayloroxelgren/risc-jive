@@ -7,7 +7,7 @@ An **early and basic implementation** of a RISC-V CPU emulator that allows the e
 
 ## Compile instruction
 ```
-javac core/cpu/CpuCore.java core/commands/*.java core/RiscJive.java
+javac core/cpu/CpuCore.java core/commands/*.java core/*.java
 ```
 
 ## Run
