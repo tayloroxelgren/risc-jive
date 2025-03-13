@@ -28,10 +28,12 @@ public class RiscJive{
     private void registerCommands() {
         // hashing using op, funct3,funct7
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00500293), new AddiCommand()); // ADDI
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x005302b3), new AddCommand()); //ADD
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x006292b3), new SllCommand());  // SLL
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x406282b3), new SubCommand()); // SUB
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00728163), new BranchEqualCommand()); // BEQ
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00729163), new BranchNotEqualCommand()); // BNE
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x027282b3), new MulCommand()); // MUL
     }
 
     public void loadSampleProgram() {
@@ -63,7 +65,10 @@ public class RiscJive{
         // This should ensure that x5==2000
         instructions.add(0xfe729fe3);
 
+        //add x5, x7, x5
+        instructions.add(0x005382b3);
 
+        instructions.add(0x027282b3);
     }
 
 

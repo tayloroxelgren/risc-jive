@@ -30,7 +30,9 @@ java core.RiscJive
 | Instruction | Description                   | Use                | Result                        | type      |
 |-------------|-------------------------------|--------------------|-------------------------------|-------------|
 | `addi`      | Add Immediate                 | `addi rd, rs1, imm`| `rd = rs1 + imm`              | arithmetic  |
+| `add`      | Add                 | `add rd, rs1, rs2`| `rd = rs1 + rs2`              | arithmetic  |
 | `sub`      | 	Subtract                 | `sub rd, rs1, rs2`| `rd = rs1 - rs2`              | arithmetic  |
+| `mul`      | 	Multiply                 | `mul rd, rs1, rs2`| `rd = (rs1 * rs2)[31:0]`              | arithmetic  |
 | `sll`      | Shift Left Logical                | `sll rd, rs1, rs2`| `rd = rs1 << rs2`              | shift  |
 | `beq`      | Branch Equal                | `beq rs1, rs2, imm`| `if(rs1 == rs2) pc += imm`              | branch  |
 | `bne`      | Branch Not Equal                | `bne rs1, rs2, imm`| `if(rs1 ≠ rs2) pc += imm`              | branch  |
