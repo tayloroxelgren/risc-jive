@@ -37,6 +37,8 @@ public class RiscJive{
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x0272c333), new DivCommand()); // DIV
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00037293), new AndiCommand()); // ANDI
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x0062f3b3), new AndCommand()); // AND
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x0062e3b3), new OrCommand()); // OR
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x0022e393), new OriCommand()); // ORI
     }
 
     public void loadSampleProgram() {
@@ -79,6 +81,12 @@ public class RiscJive{
 
         // and x7, x5, x6
         instructions.add(0x0062f3b3);
+
+        // addi x5,x5,6
+        instructions.add(0x00628293);
+
+        // ori x7, x5, 2
+        instructions.add(0x0032e393);
     }
 
 
