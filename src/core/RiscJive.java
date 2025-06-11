@@ -30,6 +30,7 @@ public class RiscJive{
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00500293), new AddiCommand()); // ADDI
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x005302b3), new AddCommand()); //ADD
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x006292b3), new SllCommand());  // SLL
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x00129293), new SlliCommand());  // SLLI
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x406282b3), new SubCommand()); // SUB
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00728163), new BranchEqualCommand()); // BEQ
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00729163), new BranchNotEqualCommand()); // BNE
@@ -87,6 +88,9 @@ public class RiscJive{
 
         // ori x7, x5, 2
         instructions.add(0x0032e393);
+
+        // slli x5,x5,1
+        instructions.add(0x00129293);
     }
 
 

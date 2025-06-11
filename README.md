@@ -35,6 +35,7 @@ java core.RiscJive
 | `mul`      | 	Multiply                 | `mul rd, rs1, rs2`| `rd = (rs1 * rs2)[31:0]`              | arithmetic  |
 | `div`      | 	Divide                 | `div rd, rs1, rs2`| `rd = rs1 / rs2`              | divide  |
 | `sll`      | Shift Left Logical                | `sll rd, rs1, rs2`| `rd = rs1 << rs2`              | shift  |
+| `slli`      | Shift Left Logical                | `sll rd, rs1, rs2`| `rd = rs1 << imm`              | shift  |
 | `beq`      | Branch Equal                | `beq rs1, rs2, imm`| `if(rs1 == rs2) pc += imm`              | branch  |
 | `bne`      | Branch Not Equal                | `bne rs1, rs2, imm`| `if(rs1 ≠ rs2) pc += imm`              | branch  |
 | `and`      | Bitwise And                | `and rd, rs1, rs2`| `rd = rs1 & rs2`              | logical  |
