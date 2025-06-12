@@ -46,6 +46,8 @@ java core.RiscJive
 | `ori`      | Bitwise Or Immediate                | `ori rd, rs1, imm`| `rd = rs1 \| imm`              | logical  |
 | `xor`      | Bitwise Xor                | `xor rd, rs1, rs2`| `rd = rs1 ^ rs2`              | logical  |
 | `xori`      | Bitwise Xor Immediate                | `xori rd, rs1, imm`| `rd = rs1 ^ imm`              | logical  |
+| `sltu`      | Set Less Than Unsigned        | `sltu rd, rs1, rs2`| `rd = (rs1 < rs2)`              | set  |
+| `sltiu`      | Set Less Than Immediate Unsigned        | `sltu rd, rs1, imm`| `rd = (rs1 < imm)`              | set  |
 
 
 ### References

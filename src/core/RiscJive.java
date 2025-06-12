@@ -44,6 +44,8 @@ public class RiscJive{
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x0022e393), new OriCommand()); // ORI
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x0063c3b3), new XorCommand()); // XOR
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x0023c393), new XoriCommand()); // XORI
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x0072b2b3), new SltuCommand()); // SLTU
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x0092b293), new SltiuCommand()); // SLTIU
     }
 
     public void loadSampleProgram() {
@@ -104,6 +106,12 @@ public class RiscJive{
 
         // xori x7, x7, 2
         instructions.add(0x0023c393);
+
+        // sltu x5, x5, x7
+        instructions.add(0x0072b2b3);
+
+        // sltiu x5, x5, 1
+        instructions.add(0x0012b293);
     }
 
 
