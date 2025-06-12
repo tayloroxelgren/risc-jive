@@ -38,6 +38,8 @@ java core.RiscJive
 | `slli`      | Shift Left Logical Immediate               | `sll rd, rs1, rs2`| `rd = rs1 << imm`              | shift  |
 | `srl`      | Shift Right Logical                | `srl rd, rs1, rs2`| `rd = rs1 >> rs2`              | shift  |
 | `srli`      | Shift Right Logical Immediate                | `srli rd, rs1, rs2`| `rd = rs1 >> imm`              | shift  |
+| `sra`      | Shift Right Arithmetic                 | `sra rd, rs1, rs2`| `rd = rs1 >>> rs2`              | shift  |
+| `srai`      | Shift Right Arithmetic  Immediate                | `srai rd, rs1, rs2`| `rd = rs1 >>> imm`              | shift  |
 | `beq`      | Branch Equal                | `beq rs1, rs2, imm`| `if(rs1 == rs2) pc += imm`              | branch  |
 | `bne`      | Branch Not Equal                | `bne rs1, rs2, imm`| `if(rs1 ≠ rs2) pc += imm`              | branch  |
 | `and`      | Bitwise And                | `and rd, rs1, rs2`| `rd = rs1 & rs2`              | logical  |
