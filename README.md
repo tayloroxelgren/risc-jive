@@ -32,7 +32,7 @@ java core.RiscJive
 | `addi`      | Add Immediate                 | `addi rd, rs1, imm`| `rd = rs1 + imm`              | arithmetic  |
 | `add`      | Add                 | `add rd, rs1, rs2`| `rd = rs1 + rs2`              | arithmetic  |
 | `sub`      | 	Subtract                 | `sub rd, rs1, rs2`| `rd = rs1 - rs2`              | arithmetic  |
-| `mul`      | 	Multiply                 | `mul rd, rs1, rs2`| `rd = (rs1 * rs2)[31:0]`              | arithmetic  |
+| `mul`      | 	Multiply                 | `mul rd, rs1, rs2`| `rd = (rs1 * rs2)[31:0]`              | multiply  |
 | `div`      | 	Divide                 | `div rd, rs1, rs2`| `rd = rs1 / rs2`              | divide  |
 | `sll`      | Shift Left Logical                | `sll rd, rs1, rs2`| `rd = rs1 << rs2`              | shift  |
 | `slli`      | Shift Left Logical Immediate               | `sll rd, rs1, rs2`| `rd = rs1 << imm`              | shift  |
@@ -44,6 +44,8 @@ java core.RiscJive
 | `andi`      | Bitwise And Immediate                | `andi rd, rs1, imm`| `rd = rs1 & imm`              | logical  |
 | `or`      | Bitwise Or                | `or rd, rs1, rs2`| `rd = rs1 \| rs2`              | logical  |
 | `ori`      | Bitwise Or Immediate                | `ori rd, rs1, imm`| `rd = rs1 \| imm`              | logical  |
+| `xor`      | Bitwise Xor                | `xor rd, rs1, rs2`| `rd = rs1 ^ rs2`              | logical  |
+| `xori`      | Bitwise Xor Immediate                | `xori rd, rs1, imm`| `rd = rs1 ^ imm`              | logical  |
 
 
 ### References
