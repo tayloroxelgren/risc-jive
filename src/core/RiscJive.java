@@ -118,6 +118,11 @@ public class RiscJive{
         // slti x5, x6, 1
         instructions.add(0x00132293);
 
+        // addi x5,x5, -8
+        instructions.add(0xff828293);
+
+        // srli x5, x5, 1
+        instructions.add(0x0012d293);
     }
 
 

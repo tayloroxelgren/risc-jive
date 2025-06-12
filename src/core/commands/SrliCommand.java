@@ -5,6 +5,6 @@ import core.cpu.CpuCore;
 public class SrliCommand implements InstructionCommand {
     @Override
     public void execute(CpuCore cpu, int opcode, int rd, int funct3, int rs1,int rs2,int funct7,int imm,int hexInstruction) {
-        cpu.setRegister(rd, cpu.getRegister(rs1) >> imm);
+        cpu.setRegister(rd, cpu.getRegister(rs1) >>> imm);
     }
 }
