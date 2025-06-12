@@ -48,6 +48,8 @@ java core.RiscJive
 | `xori`      | Bitwise Xor Immediate                | `xori rd, rs1, imm`| `rd = rs1 ^ imm`              | logical  |
 | `sltu`      | Set Less Than Unsigned        | `sltu rd, rs1, rs2`| `rd = (rs1 < rs2)`              | set  |
 | `sltiu`      | Set Less Than Immediate Unsigned        | `sltu rd, rs1, imm`| `rd = (rs1 < imm)`              | set  |
+| `slt`      | Set Less Than        | `sltu rd, rs1, rs2`| `rd = (rs1 < rs2)`              | set  |
+| `slti`      | Set Less Than Immediate        | `sltu rd, rs1, imm`| `rd = (rs1 < imm)`              | set  |
 
 
 ### References
