@@ -16,7 +16,7 @@ java core.RiscJive
 ```
 
 ## To-Do
-- Implement remaining instructions
+- Implement remaining RV32I instructions
 - Be able to convert hex codes to assembly and back
 - Allow execution of assembly rather than just hex codes
 - Create stack memory
