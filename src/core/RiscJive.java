@@ -39,6 +39,7 @@ public class RiscJive{
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00728163), new BranchEqualCommand()); // BEQ
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00729163), new BranchNotEqualCommand()); // BNE
         commandRegistry.put(InstructionHasher.getHashForInstruction(0xfe72cfe3), new BranchLessThanCommand()); // BLT
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0xfe525ee3), new BranchGreaterThanCommand()); // BGT
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x027282b3), new MulCommand()); // MUL
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x0272c333), new DivCommand()); // DIV
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00037293), new AndiCommand()); // ANDI
