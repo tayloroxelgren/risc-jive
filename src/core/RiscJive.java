@@ -55,13 +55,15 @@ public class RiscJive{
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x007322b3), new SltCommand()); // SLT
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00332293), new SltiCommand()); // SLTI
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x123452b7), new LoadUpperImmediateCommand()); // LUI
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x00000297), new AddUpperImmediatePcCommand()); // AUIPC
     }
 
     public void loadSampleProgram() {
         instructions.clear();
 
-        // lui x5, 74565
-        instructions.add(0x123452b7);
+        // auipc x5, 0
+        instructions.add(0x00000297);
+        instructions.add(0x00000297);
     }
 
 

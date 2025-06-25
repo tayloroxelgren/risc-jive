@@ -47,6 +47,7 @@ java core.RiscJive
 | `bltu`      | Branch Less Than unsigned            | `blt rs1, rs2, imm`| `if(rs1 < rs2) pc += imm`              | branch  | 
 | `bge`      | Branch Greater Than              | `bgt rs1, rs2, imm`| `if(rs1 >= rs2) pc += imm`              | branch  | 
 | `bgeu`      | Branch Greater Than unsigned             | `bgt rs1, rs2, imm`| `if(rs1 >= rs2) pc += imm`              | branch  | 
+| `auipc`      | Add Upper Immediate to PC             | `auipc rd, imm`| `rd = pc + (imm << 12)`              | branch  | 
 | `and`      | Bitwise And                | `and rd, rs1, rs2`| `rd = rs1 & rs2`              | logical  |
 | `andi`      | Bitwise And Immediate                | `andi rd, rs1, imm`| `rd = rs1 & imm`              | logical  |
 | `or`      | Bitwise Or                | `or rd, rs1, rs2`| `rd = rs1 \| rs2`              | logical  |
