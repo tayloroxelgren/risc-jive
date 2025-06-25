@@ -39,7 +39,9 @@ public class RiscJive{
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00728163), new BranchEqualCommand()); // BEQ
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00729163), new BranchNotEqualCommand()); // BNE
         commandRegistry.put(InstructionHasher.getHashForInstruction(0xfe72cfe3), new BranchLessThanCommand()); // BLT
-        commandRegistry.put(InstructionHasher.getHashForInstruction(0xfe525ee3), new BranchGreaterThanCommand()); // BGT
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0xfe526ee3), new BranchLessThanUCommand()); // BLTU
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0xfe525ee3), new BranchGreaterThanCommand()); // BGE
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0xfe42fee3), new BranchGreaterThanUCommand()); // BGEU
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x027282b3), new MulCommand()); // MUL
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x0272c333), new DivCommand()); // DIV
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00037293), new AndiCommand()); // ANDI
@@ -68,8 +70,8 @@ public class RiscJive{
         // addi x4, x4, 1
         instructions.add(0x00120213);
         // blt x4,x5,-2 
-        // branches if x4 less than x5 and then moves one instruction up (which is -2)
-        instructions.add(0xfe524fe3);
+        // branches if x5 greater than x4 and then moves one instruction up (which is -2)
+        instructions.add(0xfe42fee3);
     }
 
 

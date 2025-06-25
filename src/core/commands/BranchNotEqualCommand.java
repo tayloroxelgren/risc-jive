@@ -19,8 +19,8 @@ public class BranchNotEqualCommand implements InstructionCommand {
             if ((offset & 0x1000) != 0) { // Check if the sign bit (bit 12) is set
                 offset |= 0xFFFFE000; // Sign-extend to 32-bit signed int
             }
-            // dividing offset by 2 because my instructions are not actual bits
-            cpu.setProgramCounter(cpu.getProgramCounter()+offset/2);
+            // dividing offset by 4 because my instructions are not actual bytes
+            cpu.setProgramCounter(cpu.getProgramCounter()+offset/4);
         }
     }
 }
