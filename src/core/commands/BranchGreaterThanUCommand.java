@@ -5,7 +5,7 @@ import core.cpu.CpuCore;
 public class BranchGreaterThanUCommand implements InstructionCommand {
     @Override
     public void execute(CpuCore cpu, int opcode, int rd, int funct3, int rs1, int rs2, int funct7, int imm, int hexInstruction) {
-        if (Long.compareUnsigned(cpu.getRegister(rs1), cpu.getRegister(rs2)) >= 0) {
+        if (Integer.compareUnsigned(cpu.getRegister(rs1), cpu.getRegister(rs2)) >= 0) {
             int imm12 = (hexInstruction >> 31) & 0x1;
             int imm11 = (hexInstruction >> 7) & 0x1;
             int imm10to5 = (hexInstruction >> 25) & 0x3F;

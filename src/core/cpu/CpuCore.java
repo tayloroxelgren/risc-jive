@@ -7,7 +7,7 @@ import java.util.List;
 public class CpuCore{
     // Receiver
 
-    private final long[] registers = new long[32];
+    private final int[] registers = new int[32];
     private int programCounter;
     private List<InstructionCommand> decodedInstructions;
     private List<Integer> rawinstructions;
