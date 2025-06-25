@@ -31,6 +31,7 @@ java core.RiscJive
 |-------------|-------------------------------|--------------------|-------------------------------|-------------|
 | `addi`      | Add Immediate                 | `addi rd, rs1, imm`| `rd = rs1 + imm`              | arithmetic  |
 | `add`      | Add                 | `add rd, rs1, rs2`| `rd = rs1 + rs2`              | arithmetic  |
+| `lui`      | 	Load Upper Immediate              | `lui rd, imm`| `rd = imm << 12`              | arithmetic  |
 | `sub`      | 	Subtract                 | `sub rd, rs1, rs2`| `rd = rs1 - rs2`              | arithmetic  |
 | `mul`      | 	Multiply                 | `mul rd, rs1, rs2`| `rd = (rs1 * rs2)[31:0]`              | multiply  |
 | `div`      | 	Divide                 | `div rd, rs1, rs2`| `rd = rs1 / rs2`              | divide  |

@@ -51,14 +51,14 @@ public class CpuCore{
     }
 
 
-    public long getRegister(int index){
+    public int getRegister(int index){
         if(index==0){
             return 0;
         }
         return registers[index];
     }
 
-    public void setRegister(int index,long value){
+    public void setRegister(int index,int value){
         if(index!=0){
             registers[index]=value;
         }

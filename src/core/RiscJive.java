@@ -54,24 +54,14 @@ public class RiscJive{
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x0092b293), new SltiuCommand()); // SLTIU
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x007322b3), new SltCommand()); // SLT
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00332293), new SltiCommand()); // SLTI
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x123452b7), new LoadUpperImmediateCommand()); // LUI
     }
 
     public void loadSampleProgram() {
         instructions.clear();
 
-        // addi x5, x5, 1
-        instructions.add(0x00128293); //
-        instructions.add(0x00128293); //
-        instructions.add(0x00128293); //
-        instructions.add(0x00128293); //
-        instructions.add(0x00128293); //
-        // x5 should now be 5
-
-        // addi x4, x4, 1
-        instructions.add(0x00120213);
-        // blt x4,x5,-2 
-        // branches if x5 greater than x4 and then moves one instruction up (which is -2)
-        instructions.add(0xfe42fee3);
+        // lui x5, 74565
+        instructions.add(0x123452b7);
     }
 
 
