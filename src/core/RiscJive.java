@@ -38,6 +38,7 @@ public class RiscJive{
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x406282b3), new SubCommand()); // SUB
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00728163), new BranchEqualCommand()); // BEQ
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00729163), new BranchNotEqualCommand()); // BNE
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0xfe72cfe3), new BranchLessThanCommand()); // BLT
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x027282b3), new MulCommand()); // MUL
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x0272c333), new DivCommand()); // DIV
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00037293), new AndiCommand()); // ANDI
@@ -55,76 +56,19 @@ public class RiscJive{
     public void loadSampleProgram() {
         instructions.clear();
 
-        // addi x5, x0, 5
-        instructions.add(0x00500293); // 0x00500093: ADDI x1, x0, 5
-        
-        // addi x6, x0, 1
-        instructions.add(0x00100313); //
-        
-        // sll x5, x5, x6
-        instructions.add(0x006292b3);
+        // addi x5, x5, 1
+        instructions.add(0x00128293); //
+        instructions.add(0x00128293); //
+        instructions.add(0x00128293); //
+        instructions.add(0x00128293); //
+        instructions.add(0x00128293); //
+        // x5 should now be 5
 
-        // Adds 10000 to x5
-        for(int i=0;i<10000;i++){
-            // addi x5, x5, 1
-            instructions.add(0x00128293);
-        }
-
-        // addi x7, x0, 2000
-        instructions.add(0x7d000393); //
-
-        // sub x5, x5, x6
-        instructions.add(0x406282b3);
-
-        // bne x5, x7, -2
-        // due to offset 2 being in half-words, this jumps back by 1 instruction
-        // This should ensure that x5==2000
-        instructions.add(0xfe729fe3);
-
-        //add x5, x7, x5
-        instructions.add(0x005382b3);
-
-        // div x6, x5, x7
-        instructions.add(0x0272c333);
-
-        // andi x5, x6, 2
-        instructions.add(0x00237293);
-
-        // and x7, x5, x6
-        instructions.add(0x0062f3b3);
-
-        // addi x5,x5,6
-        instructions.add(0x00628293);
-
-        // ori x7, x5, 2
-        instructions.add(0x0032e393);
-
-        // slli x5,x5,1
-        instructions.add(0x00129293);
-
-        // srl x5, x5, x6
-        instructions.add(0x0062d2b3);
-
-        // srli x5, x5, 1
-        instructions.add(0x0012d293);
-
-        // xori x7, x7, 2
-        instructions.add(0x0023c393);
-
-        // sltu x5, x5, x7
-        instructions.add(0x0072b2b3);
-
-        // sltiu x5, x5, 1
-        instructions.add(0x0012b293);
-
-        // slti x5, x6, 1
-        instructions.add(0x00132293);
-
-        // addi x5,x5, -8
-        instructions.add(0xff828293);
-
-        // sra x5, x5, x6
-        instructions.add(0x4062d2b3);
+        // addi x4, x4, 1
+        instructions.add(0x00120213);
+        // blt x4,x5,-2 
+        // branches if x4 less than x5 and then moves one instruction up (which is -2)
+        instructions.add(0xfe524fe3);
     }
 
 
