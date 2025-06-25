@@ -68,6 +68,7 @@ public class CpuCore{
         for (int i = 0; i < registers.length; i++) {
             System.out.printf("x%d: %d\n", i, getRegister(i));
         }
+        System.out.printf("pc: %d\n", getProgramCounter());
     }
 
     public void runEmulator(){

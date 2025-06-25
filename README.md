@@ -58,6 +58,8 @@ java core.RiscJive
 | `sltiu`      | Set Less Than Immediate Unsigned        | `sltu rd, rs1, imm`| `rd = (rs1 < imm)`              | set  |
 | `slt`      | Set Less Than        | `sltu rd, rs1, rs2`| `rd = (rs1 < rs2)`              | set  |
 | `slti`      | Set Less Than Immediate        | `sltu rd, rs1, imm`| `rd = (rs1 < imm)`              | set  |
+| `jal`      | Jump and Link        | `jal rd, imm`| `rd = pc+4; pc += imm`              | 	jump  |
+| `jalr`      | Jump and Link Register        | `jalr rd, rs1, imm`| `rd = pc+4; pc = rs1+imm`              | 	jump  |
 
 
 ### References
