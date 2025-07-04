@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class RiscJive{ 
     // Invoker
@@ -73,18 +75,23 @@ public class RiscJive{
 
     public void loadSampleProgram() {
         instructions.clear();
-        // lui  x1,8         ; x1 = 8 << 12 = 0x8000
-        instructions.add(0x000080b7);
 
-        // sh   x1,0(x0)     ; mem[0..1] = low 16 bits of x1 = 0x8000
-        instructions.add(0x00101023);
-
-        // lhu  x2,0(x0)     ; x2 = zero_extend(mem[0..1]) = 0x8000
-        instructions.add(0x00005103);
 
     }
 
-
+    public void loadBinary(String path) throws IOException {
+        instructions.clear();
+        try (FileInputStream in = new FileInputStream(path)) {
+            byte[] buf = new byte[4];
+            while (in.read(buf) == 4) {
+                int insn = (buf[3] & 0xFF) << 24 |
+                        (buf[2] & 0xFF) << 16 |
+                        (buf[1] & 0xFF) << 8  |
+                        (buf[0] & 0xFF);
+                instructions.add(insn);
+            }
+        }
+    }
 
     public void decodeAndPrintInstruction(int instruction) {
         int opcode = instruction & 0x7F; // bits 0–6
@@ -137,9 +144,9 @@ public class RiscJive{
         cpu.runEmulator();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
         RiscJive emulator = new RiscJive();
-        emulator.loadSampleProgram();
+        emulator.loadBinary("testprograms/fib.bin");
         emulator.decodeInstructions();
         emulator.sendCommands(emulator.decodedInstructions,emulator.instructions);
         emulator.run();

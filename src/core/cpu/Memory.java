@@ -3,7 +3,7 @@ package core.cpu;
 public class Memory {
     private byte[] memory;
 
-    private static final int DEFAULT_MEMORY_SIZE = 12; // e.g., 1 MB
+    private static final int DEFAULT_MEMORY_SIZE = 24;
 
     public Memory() {
         memory = new byte[DEFAULT_MEMORY_SIZE];
