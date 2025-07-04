@@ -5,7 +5,7 @@
 **Risc-Jive** is a pure-Java RV32I emulator that implements the full RISC-V base integer instruction set (RV32I), including arithmetic, logic, branching, loads/stores, and control flow (JAL/JALR). It can execute inline hex-encoded instructions or flat bare-metal `.bin` files (no OS or CRT) loaded at address 0x0. A basic test program is included and instructions for how to build it.
 
 
-## Compile Instruction
+## Compile Instructions
 ```
 javac core/cpu/CpuCore.java core/commands/*.java core/*.java
 ```
