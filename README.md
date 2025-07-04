@@ -61,7 +61,9 @@ java core.RiscJive
 | `jalr`      | Jump and Link Register        | `jalr rd, rs1, imm`| `rd = pc+4; pc = rs1+imm`              | 	jump  |
 | `lw`      | Load Word                 | `lw rd, imm(rs1)`| `rd = mem[rs1+imm]`              | 	load  |
 | `lh`      | Load Half                 | `lh rd, imm(rs1)`| `rd = mem[rs1+imm][0:15]`              | 	load  |
+| `lhu`      | Load Half Unsigned                 | `lhu rd, imm(rs1)`| `rd = mem[rs1+imm][0:15]`              | 	load  |
 | `lb`      | Load Byte                 | `lb rd, imm(rs1)`| `rd = mem[rs1+imm][0:7]`              | 	load  |
+| `lbu`      | Load Byte Unsigned                 | `lbu rd, imm(rs1)`| `rd = mem[rs1+imm][0:7]`              | 	load  |
 | `sw`      | Store Word                 | `sw rs2, imm(rs1)`| `mem[rs1+imm] = rs2`              | 	store  |
 | `sh`      | Store Half                 | `sh rs2, imm(rs1)`| `mem[rs1+imm][0:15] = rs2`              | 	store  |
 | `sb`      | Store Byte                 | `sb rs2, imm(rs1)`| `mem[rs1+imm][0:7] = rs2`              | 	store  |

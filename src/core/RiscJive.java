@@ -66,116 +66,21 @@ public class RiscJive{
 
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x0000a383), new LoadWordCommand()); // LW
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00101103), new LoadHalfWordCommand()); // LH
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x00005103), new LoadHalfWordUnsignedCommand()); // LHU
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00100103), new LoadByteCommand()); // LB
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x00004103), new LoadByteUnsignedCommand()); // LBU
     }
 
     public void loadSampleProgram() {
         instructions.clear();
-        // sets memory address 0 to 300
-        // cpu.memory.writeWord(0,300);
+        // lui  x1,8         ; x1 = 8 << 12 = 0x8000
+        instructions.add(0x000080b7);
 
-        // addi x1, x1, 5555
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
-        instructions.add(0x5b308093);
+        // sh   x1,0(x0)     ; mem[0..1] = low 16 bits of x1 = 0x8000
+        instructions.add(0x00101023);
 
-        // sw x1, 0(x0)
-        instructions.add(0x00102023);
-
-        // lb x2,0(x0)
-        instructions.add(0x00000103);
-
+        // lhu  x2,0(x0)     ; x2 = zero_extend(mem[0..1]) = 0x8000
+        instructions.add(0x00005103);
 
     }
 
