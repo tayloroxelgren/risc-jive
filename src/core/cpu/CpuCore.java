@@ -11,6 +11,7 @@ public class CpuCore{
     private int programCounter;
     private List<InstructionCommand> decodedInstructions;
     private List<Integer> rawinstructions;
+    public Memory memory;
 
 
 
@@ -19,6 +20,7 @@ public class CpuCore{
         this.programCounter=0;
         this.decodedInstructions = new ArrayList<>();
         this.rawinstructions = new ArrayList<>();
+        this.memory = new Memory();
     }
 
     public void setProgram(List<InstructionCommand> sentCommands,List<Integer> instructions){
@@ -27,7 +29,7 @@ public class CpuCore{
     }
 
 
-
+    // This function extracts parameters and uses an S type immediate
     private int[] paramsFromHex(Integer instruction){
         int opcode = instruction & 0x7F; // bits 0–6
         int rd = (instruction >> 7) & 0x1F; // bits 7–11
@@ -69,6 +71,7 @@ public class CpuCore{
             System.out.printf("x%d: %d\n", i, getRegister(i));
         }
         System.out.printf("pc: %d\n", getProgramCounter());
+        memory.printMemory();
     }
 
     public void runEmulator(){

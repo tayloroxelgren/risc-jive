@@ -26,7 +26,6 @@ java core.RiscJive
 
 ### Current Instructions
 
-
 | Instruction | Description                   | Use                | Result                        | type      |
 |-------------|-------------------------------|--------------------|-------------------------------|-------------|
 | `addi`      | Add Immediate                 | `addi rd, rs1, imm`| `rd = rs1 + imm`              | arithmetic  |
@@ -60,6 +59,8 @@ java core.RiscJive
 | `slti`      | Set Less Than Immediate        | `sltu rd, rs1, imm`| `rd = (rs1 < imm)`              | set  |
 | `jal`      | Jump and Link        | `jal rd, imm`| `rd = pc+4; pc += imm`              | 	jump  |
 | `jalr`      | Jump and Link Register        | `jalr rd, rs1, imm`| `rd = pc+4; pc = rs1+imm`              | 	jump  |
+| `lw`      | Load Word                 | `lw rd, imm(rs1)`| `rd = mem[rs1+imm]`              | 	load  |
+| `sw`      | Store Word                 | `sw rs2, imm(rs1)`| `mem[rs1+imm] = rs2`              | 	store  |
 
 
 ### References
