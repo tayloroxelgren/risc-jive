@@ -3,7 +3,7 @@ package core.commands;
 import core.cpu.CpuCore;
 import core.cpu.Memory;
 
-public class StoreWordCommand implements InstructionCommand {
+public class StoreHalfWordCommand implements InstructionCommand {
     @Override
     public void execute(CpuCore cpu, int opcode, int rd, int funct3, int rs1, int rs2, int funct7, int imm, int hexInstruction) {
         // Store instructions use S type immediates, which are encoded in the instruction
@@ -13,7 +13,8 @@ public class StoreWordCommand implements InstructionCommand {
         int bottom5bits = (hexInstruction & 0x7C0) >>>7;
         // Add them together using or
         imm=top7bits | bottom5bits;
-        // System.out.println(imm);
-        cpu.memory.writeWord(cpu.getRegister(rs1) + imm, cpu.getRegister(rs2));
+        // Masks out all bits about first 2 bytes
+        cpu.memory.writeWord(cpu.getRegister(rs1) + imm, cpu.getRegister(rs2)& 0xFFFF);
+        
     }
 }

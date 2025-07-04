@@ -61,20 +61,23 @@ public class RiscJive{
 
         // Memory commands
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00502023), new StoreWordCommand()); // SW
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x002010a3), new StoreHalfWordCommand()); // SH
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x002000a3), new StoreByteCommand()); // SB
+
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x0000a383), new LoadWordCommand()); // LW
     }
 
     public void loadSampleProgram() {
         instructions.clear();
+        // sets memory address 0 to 50000
+        cpu.memory.writeWord(0,257);
 
-        // addi x1, x1, 5
-        instructions.add(0x00508093);
+        // lw x2, 0(x0)
+        instructions.add(0x00002103);
 
-        // sw x1, 0(x0)
-        instructions.add(0x00102023);
+        // sb x2, 1(x0)
+        instructions.add(0x002000a3);
 
-        // lw x7, 0(x0)
-        instructions.add(0x00002383);
 
     }
 
