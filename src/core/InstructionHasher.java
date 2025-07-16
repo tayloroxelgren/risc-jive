@@ -2,48 +2,41 @@ package core;
 
 public class InstructionHasher {
 
-    /**
-     * Computes the hash key for a 32-bit encoded RISC-V instruction from the RV32I base set.
-     * For I-type (opcode 0x13) and branch instructions (opcode 0x63), only opcode and funct3 are used.
-     * For other instructions, the hash key is computed using opcode, funct3, and funct7.
-     *
-     * @param instruction a 32-bit RISC-V instruction
-     * @return the computed hash key for lookup in the command registry
-     */
-    // public static int getHashForInstruction(int instruction) {
-    //     int opcode = instruction & 0x7F;             // bits 0–6
-    //     int funct3 = (instruction >> 12) & 0x7;        // bits 12–14
-    //     int funct7 = (instruction >> 25) & 0x7F;       // bits 25–31
-
-    //     int hashKey;
-    //     // For I-type (opcode 0x13) and branch instructions (opcode 0x63),
-    //     // only use opcode and funct3.
-    //     if (opcode == 0x13 || opcode == 0x63) {
-    //         hashKey = opcode | (funct3 << 7);
-    //     } else {
-    //         hashKey = opcode | (funct3 << 7) | (funct7 << 10);
-    //     }
-    //     return hashKey;
-    // }
-
     public static int getHashForInstruction(int instr) {
-        int opcode = instr & 0x7F;          // bits  6..0
-
-        // U-type (LUI/AUIPC) and J-type (JAL) — opcode alone is enough
-        if (opcode == 0x37 /*LUI*/ || opcode == 0x17 /*AUIPC*/
-                                || opcode == 0x6F /*JAL  */) {
+        int opcode = instr & 0x7F;
+        int funct3 = (instr >> 12) & 0x7;
+        int funct7 = (instr >> 25) & 0x7F;
+        
+        // U-type, J-type: opcode
+        if (opcode == 0x37 || opcode == 0x17 || opcode == 0x6F) {
             return opcode;
         }
-
-        int funct3 = (instr >> 12) & 0x7;   // bits 14..12
-        int funct7 = (instr >> 25) & 0x7F;  // bits 31..25
-
-        // I-type (0x13) and B-type (0x63) → only opcode+funct3
-        if (opcode == 0x13 || opcode == 0x63) {
+        
+        // I-type, S-type, B-type: opcode + funct3
+        if (opcode == 0x67 || opcode == 0x03 || opcode == 0x0F || 
+            opcode == 0x63 || opcode == 0x23) {
             return opcode | (funct3 << 7);
         }
-
-        // Everything else (R-type, S-type, etc.) → opcode+funct3+funct7
+        
+        // I-type with shifts: opcode + funct3 + funct7
+        if (opcode == 0x13) {
+            if (funct3 == 0x1 || funct3 == 0x5) {
+                return opcode | (funct3 << 7) | (funct7 << 10);
+            }
+            return opcode | (funct3 << 7);
+        }
+        
+        // I-type ECALL/EBREAK: opcode + imm
+        if (opcode == 0x73) {
+            int imm = (instr >> 20) & 0xFFF;
+            return opcode | (imm << 7);
+        }
+        
+        // R-type: opcode + funct3 + funct7
+        if (opcode == 0x33) {
+            return opcode | (funct3 << 7) | (funct7 << 10);
+        }
+        
         return opcode | (funct3 << 7) | (funct7 << 10);
     }
 
