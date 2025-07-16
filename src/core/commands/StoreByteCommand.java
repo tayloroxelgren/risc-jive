@@ -13,6 +13,8 @@ public class StoreByteCommand implements InstructionCommand {
         int bottom5bits = (hexInstruction & 0x7C0) >>>7;
         // Add them together using or
         imm=top7bits | bottom5bits;
+        // Signs the bit by pushing the 11th bit to bit 31 then brings it back and the right shift keeps the sign
+        imm = (imm << 20) >> 20;
         int address = cpu.getRegister(rs1) + imm;
         byte value  = (byte)(cpu.getRegister(rs2) & 0xFF);
         cpu.memory.writeByte(address, value);
