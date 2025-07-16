@@ -12,6 +12,7 @@ public class CpuCore{
     private List<InstructionCommand> decodedInstructions;
     private List<Integer> rawinstructions;
     public Memory memory;
+    public Boolean haltFlag = false;
 
 
 
@@ -75,7 +76,7 @@ public class CpuCore{
     }
 
     public void runEmulator(){
-        while(this.programCounter<decodedInstructions.size()){
+        while(this.programCounter<decodedInstructions.size() && (!this.haltFlag)){
             InstructionCommand currentCommand=decodedInstructions.get(this.programCounter);
             int[] params=paramsFromHex(this.rawinstructions.get(this.programCounter));
             int opcode = params[0];

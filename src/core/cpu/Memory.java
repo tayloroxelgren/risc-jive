@@ -3,7 +3,7 @@ package core.cpu;
 public class Memory {
     private byte[] memory;
 
-    private static final int DEFAULT_MEMORY_SIZE = 100*4;
+    private static final int DEFAULT_MEMORY_SIZE = 1024;
 
     public Memory() {
         memory = new byte[DEFAULT_MEMORY_SIZE];
@@ -52,7 +52,7 @@ public class Memory {
             }
             System.out.print("Decimal: " + this.readWord(i));
             
-            // New line after every 4th word (every 16 bytes)
+            // New line after every 2 words
             if ((i + 4) % 8 == 0) {
                 System.out.println();
             } else {

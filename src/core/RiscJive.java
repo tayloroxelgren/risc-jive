@@ -71,6 +71,10 @@ public class RiscJive{
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00005103), new LoadHalfWordUnsignedCommand()); // LHU
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00100103), new LoadByteCommand()); // LB
         commandRegistry.put(InstructionHasher.getHashForInstruction(0x00004103), new LoadByteUnsignedCommand()); // LBU
+
+        // Ebreak
+        commandRegistry.put(InstructionHasher.getHashForInstruction(0x00100073), new EbreakCommand()); // EBREAK
+
     }
 
     public void loadSampleProgram() {

@@ -17,19 +17,23 @@ java core.RiscJive
 ## Building Test Program
 Navigate to the testprograms directory
 
-**Assemble**
+**Step 1: Assemble the startup code (crt0.S)**
 ```
-riscv64-unknown-elf-as -march=rv32i -mabi=ilp32 -o fib.o fib.S
+riscv64-unknown-elf-as -march=rv32i -mabi=ilp32 -o crt0.o crt0.S
 ```
-**Link**
+**Step 2: Compile your C file (fib.c)**
 ```
-riscv64-unknown-elf-ld -m elf32lriscv -T link.ld --no-relax -o fib.elf fib.o
+riscv64-unknown-elf-gcc -O0 -ffreestanding -nostdlib -mabi=ilp32 -march=rv32i -c fib.c -o fib.o
 ```
-**Extract Binary**
+**Step 3: Link it using linker script**
 ```
-riscv64-unknown-elf-objcopy --only-section .text -O binary fib.elf fib.bin
+riscv64-unknown-elf-ld -m elf32lriscv -T link.ld --no-relax -o fib.elf crt0.o fib.o
 ```
-This will produce a flat `.bin` file that calculates and stores the first 12 Fibonacci numbers in memory (one byte per number).
+**Step 4: Convert to raw binary**
+```
+riscv64-unknown-elf-objcopy -O binary --only-section=.text fib.elf fib.bin
+```
+This will produce a flat `.bin` file that calculates and stores the first 12 Fibonacci numbers in memory.
 
 ## To-Do
 - [x] Implement remaining RV32I instructions

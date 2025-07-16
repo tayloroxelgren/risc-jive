@@ -1,14 +1,18 @@
 ENTRY(_start)
 
-SECTIONS
-{
-  /* Place .text at address 0x0 */
-  . = 0x0;
+MEMORY{
+  RAM (RWX) : ORIGIN =0X0, LENGTH = 1024
+}
+
+SECTIONS {
+  /* Code starts at 0x0 */
+  . = ORIGIN(RAM);
+  _stack_top = ORIGIN(RAM) + LENGTH(RAM); 
+
   .text : {
     KEEP(*(.text*))
-  }
+  } > RAM
 
-  /* Discard everything else */
   /DISCARD/ : {
     *(.data*)
     *(.bss*)
@@ -16,3 +20,4 @@ SECTIONS
     *(.note*)
   }
 }
+
