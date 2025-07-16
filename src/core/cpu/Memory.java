@@ -3,7 +3,7 @@ package core.cpu;
 public class Memory {
     private byte[] memory;
 
-    private static final int DEFAULT_MEMORY_SIZE = 24;
+    private static final int DEFAULT_MEMORY_SIZE = 100*4;
 
     public Memory() {
         memory = new byte[DEFAULT_MEMORY_SIZE];
@@ -45,8 +45,19 @@ public class Memory {
     }
 
     public void printMemory() {
-        for (int i = 0; i < memory.length; i++) {
-            System.out.println("Memory " + i + ": " + (memory[i] & 0xFF));
+        for (int i = 0; i < memory.length; i += 4) {
+            System.out.printf("Memory[0x%03X]: ", i);
+            for (int j = 0; j < 4; j++) {
+                System.out.printf("%02X ", memory[i + j] & 0xFF);
+            }
+            System.out.print("Decimal: " + this.readWord(i));
+            
+            // New line after every 4th word (every 16 bytes)
+            if ((i + 4) % 8 == 0) {
+                System.out.println();
+            } else {
+                System.out.print("  ");
+            }
         }
     }
 }
