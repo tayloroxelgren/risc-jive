@@ -40,6 +40,8 @@ This will produce a flat `.bin` file that calculates and stores the first 12 Fib
 - [x] Allow execution of assembly rather than just hex codes (.bin files)
 - [x] Create memory
 - [ ] Basic debugger
+- [ ] Split program ROM from data RAM memory model
+- [ ] Basic UART implementation (MMIO TX/status)
 
 ---
 
