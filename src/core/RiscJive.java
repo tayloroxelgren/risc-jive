@@ -87,12 +87,23 @@ public class RiscJive{
         instructions.clear();
         try (FileInputStream in = new FileInputStream(path)) {
             byte[] buf = new byte[4];
-            while (in.read(buf) == 4) {
-                int insn = (buf[3] & 0xFF) << 24 |
-                        (buf[2] & 0xFF) << 16 |
-                        (buf[1] & 0xFF) << 8  |
-                        (buf[0] & 0xFF);
-                instructions.add(insn);
+            int address = 0;
+            int bytesRead;
+            while ((bytesRead = in.read(buf)) > 0) {
+                for (int i = 0; i < bytesRead; i++) {
+                    // Mirror the loaded image into RAM so .data/.bss accesses work.
+                    this.cpu.memory.writeByte(address + i, buf[i] & 0xFF);
+                }
+
+                if (bytesRead == 4) {
+                    int insn = (buf[3] & 0xFF) << 24 |
+                            (buf[2] & 0xFF) << 16 |
+                            (buf[1] & 0xFF) << 8  |
+                            (buf[0] & 0xFF);
+                    instructions.add(insn);
+                }
+
+                address += bytesRead;
             }
         }
     }

@@ -13,9 +13,16 @@ SECTIONS {
     KEEP(*(.text*))
   } > RAM
 
-  /DISCARD/ : {
+  .data : {
     *(.data*)
+  } > RAM
+
+  .bss : {
     *(.bss*)
+    *(COMMON)
+  } > RAM
+
+  /DISCARD/ : {
     *(.comment*)
     *(.note*)
   }

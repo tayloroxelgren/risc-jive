@@ -31,7 +31,7 @@ riscv64-unknown-elf-ld -m elf32lriscv -T link.ld --no-relax -o fib.elf crt0.o fi
 ```
 **Step 4: Convert to raw binary**
 ```
-riscv64-unknown-elf-objcopy -O binary --only-section=.text fib.elf fib.bin
+riscv64-unknown-elf-objcopy -O binary fib.elf fib.bin
 ```
 This will produce a flat `.bin` file that calculates and stores the first 12 Fibonacci numbers in memory.
 
